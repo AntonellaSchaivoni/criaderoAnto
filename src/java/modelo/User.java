@@ -8,6 +8,8 @@ import Daos.*;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -16,6 +18,8 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "user")
+@NamedQueries({
+@NamedQuery(name = "usuario.exist", query = "Select u from User u where u.username= :username and u.password= :password")})
 public class User extends AbstractEntity<User> implements Serializable {
     
     @Column(name="username")

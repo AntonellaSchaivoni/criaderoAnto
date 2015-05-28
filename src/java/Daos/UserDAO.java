@@ -37,5 +37,17 @@ public class UserDAO extends AbstractDAO <User>{
         return usuario;
     
        }
+       
+        public boolean login(String user, String pass){
+        User usuario = new User();
+        usuario.setUsername(user);
+        usuario.setPassword(pass);
+        Query query=em.createNamedQuery("usuario.exist");
+        query.setParameter("username", usuario.getUsername());
+         query.setParameter("password", usuario.getPassword());
+         List<User>usuarios=query.getResultList();
+         return !usuarios.isEmpty();
+        
+    }
     
 }
