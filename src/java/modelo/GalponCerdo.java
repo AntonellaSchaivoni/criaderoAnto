@@ -20,7 +20,7 @@ import javax.persistence.Temporal;
  */
 @Entity
 @Table (name = "galpon_cerdo")
-public class GalponCerdo extends AbstractEntity <GalponCerdo> implements Serializable {
+public class GalponCerdo extends Galpon {
     @OneToMany(mappedBy = "galpon")
     private ArrayList<Galpon> galpon;
     @OneToMany(mappedBy = "cerdo")

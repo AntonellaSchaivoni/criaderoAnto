@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import modelo.Galpon;
+import modelo.GalponCerdo;
 
 /**
  *
@@ -17,7 +18,7 @@ import modelo.Galpon;
  */
 @Stateless
 @LocalBean
-public class GalponDAO extends AbstractDAO <Galpon>{
+public class GalponDAO extends AbstractDAO <GalponCerdo>{
 
     
      public GalponDAO() {
