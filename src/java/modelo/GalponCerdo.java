@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -20,6 +22,9 @@ import javax.persistence.Temporal;
  */
 @Entity
 @Table (name = "galpon_cerdo")
+@NamedQueries({
+@NamedQuery(name = "galponcerdo.galponactual", query = "select gc from galponcerdo gc where gc.cerdo = :cerdo AND gc.f_fin = NULL ")})
+
 public class GalponCerdo extends Galpon {
     @OneToMany(mappedBy = "galpon")
     private ArrayList<Galpon> galpon;

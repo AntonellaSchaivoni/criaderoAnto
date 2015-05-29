@@ -30,11 +30,38 @@ public class GalponCerdoDAO extends AbstractDAO <GalponCerdo>{
     }
     
 
-       public List<GalponCerdo> getAll (){
+    public List<GalponCerdo> getAll (){
         Query query = em.createNamedQuery("galpn_cerdo.all");
 	List <GalponCerdo> galponcerdos = query.getResultList(); 
         return galponcerdos;
     
-       }
+    }
+    
+    /**
+     *
+     * 
+     * @param idCerdo : Numero de id del cerdo a buscar
+     * @return GalponCerdo : Objeto que contiene la ubicación del cerdo,
+     *                     fecha de ingreso y fecha de egreso.
+     */
+    public GalponCerdo galponActual(Long idCerdo) throws Exception {
+        
+        Query query = em.createNamedQuery("galponcerdo.galponactual");
+	query.setParameter("cerdo", idCerdo);
+        List<GalponCerdo> galponcerdos = query.getResultList();
+        
+        /* Comprobar que haya galpones en la lista */  
+        if (galponcerdos.isEmpty()){
+            throw new Exception("No se ha encontrado galpon");
+        } 
+        
+        /*  Devolver el primer galpon, que debería ser el único   */
+        return galponcerdos.get(0);
+        
+        
+        
+        
+        
+    }
     
 }
