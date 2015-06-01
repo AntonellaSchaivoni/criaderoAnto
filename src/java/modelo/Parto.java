@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
@@ -30,8 +30,8 @@ public class Parto extends AbstractEntity <Parto> implements Serializable {
     @Column(name="fecha")
  @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
-    @OneToMany(mappedBy = "cerdo")
-    private ArrayList<Cerdo> cerdo;
+    @OneToOne(mappedBy = "cerdo")
+    private Cerdo cerdo;
 
     public int getNumParto() {
         return numParto;
@@ -65,11 +65,11 @@ public class Parto extends AbstractEntity <Parto> implements Serializable {
         this.fecha = fecha;
     }
 
-    public ArrayList<Cerdo> getCerdo() {
+    public Cerdo getCerdo() {
         return cerdo;
     }
 
-    public void setCerdo(ArrayList<Cerdo> cerdo) {
+    public void setCerdo(Cerdo cerdo) {
         this.cerdo = cerdo;
     }
     
