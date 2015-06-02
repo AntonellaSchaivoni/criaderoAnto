@@ -4,13 +4,13 @@
  */
 package modelo;
 
-import Daos.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
@@ -20,14 +20,19 @@ import javax.persistence.Temporal;
  */
 @Entity
 @Table (name = "pesaje")
+@NamedQueries({
+@NamedQuery(name = "pesaje.historial", query = "SELECT p FROM pesaje p WHERE p.cerdo = :cerdo ORDER BY p.fecha"),
+@NamedQuery(name = "pesaje.all", query = "SELECT p FROM pesaje p")
+})
+
 public class Pesaje extends AbstractEntity <Pesaje> implements Serializable {
     @Column(name="valor")
     private float valor;  
-     @Column(name="fecha")
- @Temporal(javax.persistence.TemporalType.DATE)
+    @Column(name="fecha")
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
-     @OneToMany(mappedBy = "cerdo")
-    private ArrayList<Cerdo> cerdo;
+    @OneToOne(mappedBy = "cerdo")
+    private Cerdo cerdo;
 
     public float getValor() {
         return valor;
@@ -45,11 +50,11 @@ public class Pesaje extends AbstractEntity <Pesaje> implements Serializable {
         this.fecha = fecha;
     }
 
-    public ArrayList<Cerdo> getCerdo() {
+    public Cerdo getCerdo() {
         return cerdo;
     }
 
-    public void setCerdo(ArrayList<Cerdo> cerdo) {
+    public void setCerdo(Cerdo cerdo) {
         this.cerdo = cerdo;
     }
      

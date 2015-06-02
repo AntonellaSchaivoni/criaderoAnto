@@ -9,6 +9,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import modelo.Cerdo;
 import modelo.Pesaje;
 
 /**
@@ -30,11 +31,24 @@ public class PesajeDAO extends AbstractDAO <Pesaje>{
     }
     
 
-       public List<Pesaje> getAll (){
+    public List<Pesaje> getAll (){
         Query query = em.createNamedQuery("pesaje.all");
 	List <Pesaje> pesa = query.getResultList(); 
         return pesa;
+    }
     
-       }
+    /**
+    * Devuelve la lista de pesajes del cerdo seleccionado.
+    * 
+    * @param cerdo : 
+    * @return 
+    * 
+    */
+    public List<Pesaje> historial (Cerdo cerdo){
+        Query query = em.createNamedQuery("pesaje.historial");
+        query.setParameter("cerdo", cerdo);
+	List <Pesaje> pesa = query.getResultList(); 
+        return pesa;
+    }
     
 }
