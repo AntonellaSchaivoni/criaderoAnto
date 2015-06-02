@@ -8,6 +8,7 @@ package BackingBean;
 import Daos.CerdoDAO;
 import Daos.GalponCerdoDAO;
 import Daos.GalponDAO;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -81,6 +82,10 @@ public class BackingCerdo {
                                                       + e.getMessage()));
             return "";
         }
+    }
+    
+    private List<Cerdo> listarCerdos (){
+        return cerdoDAO.getAll();
     }
     
 }
