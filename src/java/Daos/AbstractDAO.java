@@ -17,11 +17,11 @@ import javax.persistence.PersistenceUnit;
  *
  * @author Ger!
  */
-@PersistenceUnit(unitName = "PU")
+
 
 public abstract class  AbstractDAO <T> {
-    @PersistenceContext
-    protected  EntityManager em;
+    @PersistenceUnit(unitName = "PU")
+   protected  EntityManager em;
     private Class<T> entityClass;
 
     public AbstractDAO(Class classType) {

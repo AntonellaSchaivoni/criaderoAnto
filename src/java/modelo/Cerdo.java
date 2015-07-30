@@ -25,6 +25,7 @@ public class Cerdo extends AbstractEntity <Cerdo> implements Serializable {
     private float clasificacion;
     @OneToMany(mappedBy = "galpon")
     private ArrayList<Galpon> galpon;
+    
 
     public float getSexo() {
         return sexo;
