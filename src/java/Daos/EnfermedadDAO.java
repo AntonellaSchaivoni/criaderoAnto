@@ -31,7 +31,7 @@ public class EnfermedadDAO extends AbstractDAO <Enfermedad>{
     
 
        public List<Enfermedad> getAll (){
-        Query query = em.createNamedQuery("Enfermedad.all");
+        Query query = em.createNamedQuery("Enfermedad.findAll");
 	List <Enfermedad> enf = query.getResultList(); 
         return enf;
     

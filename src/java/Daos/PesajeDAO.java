@@ -4,6 +4,7 @@
  */
 package Daos;
 
+import java.util.Date;
 import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -32,11 +33,11 @@ public class PesajeDAO extends AbstractDAO <Pesaje>{
     
 
     public List<Pesaje> getAll (){
-        Query query = em.createNamedQuery("pesaje.all");
-	List <Pesaje> pesa = query.getResultList(); 
-        return pesa;
+        Query query = em.createNamedQuery("Pesaje.findAll");	 
+        return  query.getResultList();
     }
     
+
     /**
     * Devuelve la lista de pesajes del cerdo seleccionado.
     * 
@@ -45,10 +46,9 @@ public class PesajeDAO extends AbstractDAO <Pesaje>{
     * 
     */
     public List<Pesaje> historial (Cerdo cerdo){
-        Query query = em.createNamedQuery("pesaje.historial");
-        query.setParameter("cerdo", cerdo);
-	List <Pesaje> pesa = query.getResultList(); 
-        return pesa;
+        Query query = em.createNamedQuery("Pesaje.findByIdCerdo");     
+	return query.getResultList(); 
+        
     }
     
 }

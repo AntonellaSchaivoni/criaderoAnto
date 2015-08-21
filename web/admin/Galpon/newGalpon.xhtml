@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Crear Nuevo Galpon</title>
+         <link href="../../Resource/css/demo.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body>
+        <h:form id="Registrar">
+            <h:panelGrid columns="2">
+                <h:outputText value="Capacidad"  />                                          
+                <h:inputText id="capacidad" value="#{backingGalpon.galponGral.capacidad }" title="nombre" />
+
+                <h:outputText value="Nombre del Galpon"/>                 
+                <h:inputText id="nombre" value="#{backingGalpon.galponGral.nombre}" title="nombre" required="true" requiredMessage="Requerido" />
+
+                <h:outputText value="Numero de Galpon"/>                  
+                <h:inputText id="num" value="#{backingGalpon.galponGral.numero}" title="nombre" required="true" requiredMessage="Requerido" />
+
+                <h:outputText value="Temperatura"/>                  
+                <h:inputText id="temp" value="#{backingGalpon.galponGral.temperatura}" title="nombre"  />
+
+                <h:commandButton action="#{backingGalpon.agregarGalponGral()}" value="Crear" />
+            </h:panelGrid> 
+        </h:form>
+    </h:body>
+</html>
+

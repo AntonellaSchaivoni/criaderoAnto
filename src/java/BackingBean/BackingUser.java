@@ -39,7 +39,7 @@ public class BackingUser {
        if(userDAO.login(user.getUsername(), user.getPassword())){
             FacesContext context = FacesContext.getCurrentInstance();
             context.getExternalContext().getSessionMap().put("usuario", user);
-            return ""; //pagina bienvenida
+            return "/Web Pages/newhtml.html"; //pagina bienvenida
             
         }else{
             FacesContext context = FacesContext.getCurrentInstance();

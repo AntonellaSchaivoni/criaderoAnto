@@ -31,9 +31,8 @@ public class VacunaDAO extends AbstractDAO <Vacuna>{
     
 
        public List<Vacuna> getAll (){
-        Query query = em.createNamedQuery("vacuna.all");
-	List <Vacuna> vac = query.getResultList(); 
-        return vac;
+        Query query = em.createNamedQuery("Vacuna.findAll");	 
+        return query.getResultList(); 
     
        }
     

@@ -4,70 +4,130 @@
  */
 package modelo;
 
-import Daos.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Administrador
+ * @author Sandoval
  */
 @Entity
-@Table (name = "galpon_cerdo")
+@Table(name = "galpon_cerdo")
+@XmlRootElement
 @NamedQueries({
-@NamedQuery(name = "galponcerdo.galponactual", query = "select gc from galponcerdo gc where gc.cerdo = :cerdo AND gc.f_fin = NULL ")})
+    @NamedQuery(name = "GalponCerdo.findAll", query = "SELECT g FROM GalponCerdo g"),
+    @NamedQuery(name = "GalponCerdo.findByIdgalponCerdo", query = "SELECT g FROM GalponCerdo g WHERE g.idgalponCerdo = :idgalponCerdo"),
+    @NamedQuery(name = "GalponCerdo.findByFIni", query = "SELECT g FROM GalponCerdo g WHERE g.fIni = :fIni"),
+    @NamedQuery(name = "GalponCerdo.findByFFin", query = "SELECT g FROM GalponCerdo g WHERE g.fFin = :fFin")})
+public class GalponCerdo implements Serializable {
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "idgalpon_cerdo")
+    private Integer idgalponCerdo;
+    @Column(name = "f_ini")
+    @Temporal(TemporalType.DATE)
+    private Date fIni;
+    @Column(name = "f_fin")
+    @Temporal(TemporalType.DATE)
+    private Date fFin;
+    @JoinColumn(name = "idgalpon", referencedColumnName = "idgalpon")
+    @ManyToOne
+    private Galpon idgalpon;
+    @JoinColumn(name = "idcerdo", referencedColumnName = "idcerdo")
+    @ManyToOne
+    private Cerdo idcerdo;
 
-public class GalponCerdo extends Galpon {
-    @OneToMany(mappedBy = "galpon")
-    private ArrayList<Galpon> galpon;
-    @OneToMany(mappedBy = "cerdo")
-    private ArrayList<Cerdo> cerdo;
-    @Column(name="f_ini")
-     @Temporal(javax.persistence.TemporalType.DATE)
-    private Date f_ini;
-     @Temporal(javax.persistence.TemporalType.DATE)
-     @Column(name="f_fin")
-     private Date f_fin;
-
-    public Date getF_fin() {
-        return f_fin;
+    public GalponCerdo() {
     }
 
-    public void setF_fin(Date f_fin) {
-        this.f_fin = f_fin;
+    public GalponCerdo(Integer idgalponCerdo) {
+        this.idgalponCerdo = idgalponCerdo;
     }
 
-    public ArrayList<Galpon> getGalpon() {
-        return galpon;
+    public Integer getIdgalponCerdo() {
+        return idgalponCerdo;
     }
 
-    public void setGalpon(ArrayList<Galpon> galpon) {
-        this.galpon = galpon;
+    public void setIdgalponCerdo(Integer idgalponCerdo) {
+        this.idgalponCerdo = idgalponCerdo;
     }
 
-    public ArrayList<Cerdo> getCerdo() {
-        return cerdo;
+    public Date getFIni() {
+        return fIni;
     }
 
-    public void setCerdo(ArrayList<Cerdo> cerdo) {
-        this.cerdo = cerdo;
+    public void setFIni(Date fIni) {
+        this.fIni = fIni;
     }
 
-    public Date getF_ini() {
-        return f_ini;
+    public Date getFFin() {
+        return fFin;
     }
 
-    public void setF_ini(Date f_ini) {
-        this.f_ini = f_ini;
+    public void setFFin(Date fFin) {
+        this.fFin = fFin;
     }
-     
+
+    public Galpon getIdgalpon() {
+        return idgalpon;
+    }
+
+    public void setIdgalpon(Galpon idgalpon) {
+        this.idgalpon = idgalpon;
+    }
+
+    public Cerdo getIdcerdo() {
+        return idcerdo;
+    }
+
+    public void setIdcerdo(Cerdo idcerdo) {
+        this.idcerdo = idcerdo;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (idgalponCerdo != null ? idgalponCerdo.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof GalponCerdo)) {
+            return false;
+        }
+        GalponCerdo other = (GalponCerdo) object;
+        if ((this.idgalponCerdo == null && other.idgalponCerdo != null) || (this.idgalponCerdo != null && !this.idgalponCerdo.equals(other.idgalponCerdo))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "modelo.GalponCerdo[ idgalponCerdo=" + idgalponCerdo + " ]";
+    }
+
+    public List getCerdo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

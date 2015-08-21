@@ -28,13 +28,44 @@ public class BackingPesaje {
     private PesajeDAO pesajeDAO;
     @EJB
     private CerdoDAO cerdoDAO;
+    private int idcerdo;
+    private Cerdo cerdo;
+
+   
+   
     
     /*  Atributos para crear nuevo pesaje         */
-    private Long idCerdo;
+    private Cerdo idCerdo;
     private float valor;
     private Date fecha;
+    private Pesaje pesaje;
     
     public BackingPesaje() {
+        pesaje= new Pesaje();
+        
+    }
+
+    public Pesaje getPesaje() {
+        return pesaje;
+    }
+ public Cerdo getCerdo() {
+        return cerdo;
+    }
+
+    public void setCerdo(Cerdo cerdo) {
+        this.cerdo = cerdo;
+    }
+
+    public void setPesaje(Pesaje pesaje) {
+        this.pesaje = pesaje;
+    }
+    
+     public int getIdcerdo() {
+        return idcerdo;
+    }
+
+    public void setIdcerdo(int idcerdo) {
+        this.idcerdo = idcerdo;
     }
 
     public PesajeDAO getPesajeDAO() {
@@ -45,11 +76,11 @@ public class BackingPesaje {
         this.pesajeDAO = pesajeDAO;
     }
 
-    public Long getIdCerdo() {
+    public Cerdo getIdCerdo() {
         return idCerdo;
     }
 
-    public void setIdCerdo(Long idCerdo) {
+    public void setIdCerdo(Cerdo idCerdo) {
         this.idCerdo = idCerdo;
     }
 
@@ -68,22 +99,27 @@ public class BackingPesaje {
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
+       public List <Pesaje> getPesajes(){
+         return pesajeDAO.getAll();
+     }
     
-    public List<Pesaje> historialPesaje(Long idCerdo){
-        Cerdo cerdo = cerdoDAO.find(idCerdo);
+    public List<Pesaje> historialPesaje(int idCerdo){
+        Cerdo cerdo = cerdoDAO.buscar(idCerdo);
         return pesajeDAO.historial(cerdo);
     }
     
+  //  public List<Pesaje> historialPesaje(int idCerdo){
+    //    Cerdo cerdo = cerdoDAO.buscar(idCerdo);
+     //   return index?faces-redirect=true;
+    //}
+    
+    
     public String crearPesaje(){
         try{
-            Cerdo cerdo = cerdoDAO.find(idCerdo);
-            /*   Inicializacion de cerdo   */
-            Pesaje pesaje = new Pesaje();
-            pesaje.setCerdo(cerdo);
-            pesaje.setFecha(fecha);
-            pesaje.setValor(valor);
-
+    
             /*   Almacenamiento en Base de Datos   */
+            cerdo = cerdoDAO.buscar(idcerdo);
+            pesaje.setIdcerdo(cerdo);
             pesajeDAO.create(pesaje);
             
             /*   Mensaje de exito   */

@@ -18,24 +18,23 @@ import modelo.GalponCerdo;
  */
 @Stateless
 @LocalBean
-public class GalponDAO extends AbstractDAO <GalponCerdo>{
+public class GalponDAO extends AbstractDAO<Galpon> {
 
-    
-     public GalponDAO() {
+    public GalponDAO() {
         super(Galpon.class);
     }
-    
+
     @Override
     protected EntityManager getEntityManager() {
-                return em;
+        return em;
     }
-    
 
-       public List<Galpon> getAll (){
-        Query query = em.createNamedQuery("galpon.all");
-	List <Galpon> gal = query.getResultList(); 
-        return gal;
+    public List<Galpon> getAll() {
+        Query query = em.createNamedQuery("Galpon.findAll");    
+        return  query.getResultList();
+
+    }
+
     
-       }
     
 }

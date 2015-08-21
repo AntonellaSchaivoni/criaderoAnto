@@ -33,17 +33,41 @@ public class BackingCerdo {
     private CerdoDAO cerdoDAO;
     @EJB
     private GalponCerdoDAO galponCerdo;
-
-    public BackingCerdo() {
-    }
     
-    public Cerdo buscarCerdo(Long id) {
-        return cerdoDAO.find(id);     
-    }
+    private Cerdo cerdo;
     
-    public String eliminarCerdo(Long id) {
+    public BackingCerdo(){
+        cerdo= new Cerdo();
+    }
+    public Cerdo getCerdo() {
+        return cerdo;
+    }
+    public void setCerdo(Cerdo cerdo) {
+        this.cerdo = cerdo;
+    }      
+     public List <Cerdo> getCerdos(){
+         return cerdoDAO.getAll();
+     }
+     public String agregarCerdo() {
         try {
-            Cerdo cerdo = cerdoDAO.find(id);
+           
+            cerdoDAO.create(cerdo);
+           FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage("El cerdo fué agregado exitosamente"));
+            return "/admin/Cerdo/index.xhtml"; //retorna al listado de galpones
+        } catch (Exception e) {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage("Error al agregar el cerdo"));
+            return "/admin/Cerdo/newCerdo.xhtml"; //retorna al form de creacion del galpon
+        }
+     }
+    public Cerdo buscarCerdo(int id) {
+        return cerdoDAO.buscar(id);     
+    }
+        
+    public String eliminarCerdo(int id) {
+        try {
+             cerdo = cerdoDAO.buscar(id);
             /*  El cerdo no debería ser eliminado    */            
             cerdoDAO.remove(cerdo);
             FacesContext context = FacesContext.getCurrentInstance();
@@ -63,9 +87,9 @@ public class BackingCerdo {
      *        idGalpon : Numero de id del galpón al cual es movido el cerdo.
      * @return String : Retorna mensaje de confirmación o de error del sistema. 
      */
-    public String moverCerdo(Long idCerdo, Long idGalpon){
+    public String moverCerdo(int idCerdo, int idGalpon){
         try {
-            Cerdo cerdo = cerdoDAO.find(idCerdo);
+            Cerdo cerdo = cerdoDAO.buscar(idCerdo);
             GalponCerdo gc = galponCerdo.galponActual(idCerdo);
             
             /*  Eliminar cerdo de gc             */
@@ -84,8 +108,5 @@ public class BackingCerdo {
         }
     }
     
-    private List<Cerdo> listarCerdos (){
-        return cerdoDAO.getAll();
-    }
-    
+ 
 }

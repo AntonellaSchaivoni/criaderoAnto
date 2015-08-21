@@ -5,38 +5,67 @@
 package modelo;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Administrador
+ * @author Sandoval
  */
 @Entity
 @Table(name = "cerdo_vacuna")
-public class CerdoVacuna extends AbstractEntity<CerdoVacuna> implements Serializable {
-
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "CerdoVacuna.findAll", query = "SELECT c FROM CerdoVacuna c"),
+    @NamedQuery(name = "CerdoVacuna.findByIdcerdoVacuna", query = "SELECT c FROM CerdoVacuna c WHERE c.idcerdoVacuna = :idcerdoVacuna"),
+    @NamedQuery(name = "CerdoVacuna.findByFecha", query = "SELECT c FROM CerdoVacuna c WHERE c.fecha = :fecha"),
+    @NamedQuery(name = "CerdoVacuna.findByDosis", query = "SELECT c FROM CerdoVacuna c WHERE c.dosis = :dosis")})
+public class CerdoVacuna implements Serializable {
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "idcerdo_vacuna")
+    private Integer idcerdoVacuna;
     @Column(name = "fecha")
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(TemporalType.DATE)
     private Date fecha;
-    @OneToMany(mappedBy = "cerdo")
-    private ArrayList<Cerdo> cerdo;
-    @OneToMany(mappedBy = "vacuna")
-    private ArrayList<Vacuna> vacuna;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "dosis")
-    private float dosis;
+    private Float dosis;
+    @JoinColumn(name = "idvacuna", referencedColumnName = "idvacuna")
+    @ManyToOne
+    private Vacuna idvacuna;
+    @JoinColumn(name = "idcerdo", referencedColumnName = "idcerdo")
+    @ManyToOne
+    private Cerdo idcerdo;
 
-    public float getDosis() {
-        return dosis;
+    public CerdoVacuna() {
     }
 
-    public void setDosis(float dosis) {
-        this.dosis = dosis;
+    public CerdoVacuna(Integer idcerdoVacuna) {
+        this.idcerdoVacuna = idcerdoVacuna;
+    }
+
+    public Integer getIdcerdoVacuna() {
+        return idcerdoVacuna;
+    }
+
+    public void setIdcerdoVacuna(Integer idcerdoVacuna) {
+        this.idcerdoVacuna = idcerdoVacuna;
     }
 
     public Date getFecha() {
@@ -47,19 +76,53 @@ public class CerdoVacuna extends AbstractEntity<CerdoVacuna> implements Serializ
         this.fecha = fecha;
     }
 
-    public ArrayList<Cerdo> getCerdo() {
-        return cerdo;
+    public Float getDosis() {
+        return dosis;
     }
 
-    public void setCerdo(ArrayList<Cerdo> cerdo) {
-        this.cerdo = cerdo;
+    public void setDosis(Float dosis) {
+        this.dosis = dosis;
     }
 
-    public ArrayList<modelo.Vacuna> getVacuna() {
-        return vacuna;
+    public Vacuna getIdvacuna() {
+        return idvacuna;
     }
 
-    public void setVacuna(ArrayList<modelo.Vacuna> vacuna) {
-        this.vacuna = vacuna;
+    public void setIdvacuna(Vacuna idvacuna) {
+        this.idvacuna = idvacuna;
     }
+
+    public Cerdo getIdcerdo() {
+        return idcerdo;
+    }
+
+    public void setIdcerdo(Cerdo idcerdo) {
+        this.idcerdo = idcerdo;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (idcerdoVacuna != null ? idcerdoVacuna.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof CerdoVacuna)) {
+            return false;
+        }
+        CerdoVacuna other = (CerdoVacuna) object;
+        if ((this.idcerdoVacuna == null && other.idcerdoVacuna != null) || (this.idcerdoVacuna != null && !this.idcerdoVacuna.equals(other.idcerdoVacuna))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "modelo.CerdoVacuna[ idcerdoVacuna=" + idcerdoVacuna + " ]";
+    }
+    
 }

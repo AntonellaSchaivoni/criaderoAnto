@@ -18,12 +18,13 @@ import javax.persistence.PersistenceUnit;
  * @author Ger!
  */
 
-
+ @PersistenceUnit(unitName = "PU")
 public abstract class  AbstractDAO <T> {
-    @PersistenceUnit(unitName = "PU")
-   protected  EntityManager em;
-    private Class<T> entityClass;
-
+   
+    @PersistenceContext
+    protected  EntityManager em;
+    final Class<T> entityClass;
+ 
     public AbstractDAO(Class classType) {
         this.entityClass = classType;
     }
@@ -32,19 +33,19 @@ public abstract class  AbstractDAO <T> {
 
     public void create(T entity) {
         
-        getEntityManager().persist(entity);
+        em.persist(entity);
     }
 
     public void edit(T entity) {
         getEntityManager().merge(entity);
     }
 
-    public void remove(T entity) throws Exception{
-        getEntityManager().remove(getEntityManager().merge(entity));
+    public void remove(T t) {
+       em.remove( em.merge(t));
     }
 
-    public T find(Long id) {
-        return getEntityManager().find(entityClass, id);
+    public T buscar(int id) {
+        return em.find(entityClass, id);
     }
     
     

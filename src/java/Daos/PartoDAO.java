@@ -17,24 +17,21 @@ import modelo.Parto;
  */
 @Stateless
 @LocalBean
-public class PartoDAO extends AbstractDAO <Parto>{
+public class PartoDAO extends AbstractDAO<Parto> {
 
-    
-     public PartoDAO() {
+    public PartoDAO() {
         super(Parto.class);
     }
-    
+
     @Override
     protected EntityManager getEntityManager() {
-                return em;
+        return em;
     }
-    
 
-       public List<Parto> getAll (){
-        Query query = em.createNamedQuery("parto.all");
-	List <Parto> part = query.getResultList(); 
-        return part;
-    
-       }
-    
+    public List<Parto> getAll() {
+        Query query = em.createNamedQuery("Parto.findAll");
+        return query.getResultList();
+
+
+    }
 }

@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Ver Cerdos</title>
+        <link href="../../Resource/css/demo.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body>
+        <h:form id="TematicasExistentes">
+            <h:dataTable value="#{backingCerdo.cerdos}" var="cerdo"> 
+                <h:column>
+                    <f:facet name="d">
+                        <h:outputText value="Id Cerdo"></h:outputText>
+                    </f:facet>
+                    <h:outputText value="#{cerdo.idcerdo}" ></h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Numero de Caravana"></h:outputText>
+                    </f:facet>
+                    <h:outputText value="#{cerdo.NCaravana}" ></h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Estado del Cerdo"></h:outputText>
+                    </f:facet>                    
+                    <h:outputText value="#{cerdo.estadoCorporal}"></h:outputText>                         
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Galpon al que pertenece"></h:outputText>
+                    </f:facet>                    
+                    <h:outputText value="#{cerdo.galpon}"></h:outputText>                              
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Sexo"></h:outputText>
+                    </f:facet>                     
+                    <h:outputText value="#{cerdo.sexo}"></h:outputText>                              
+                </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Accion"></h:outputText> 
+                </f:facet>
+                <h:commandButton value="Borrar" action="#{backingCerdo.eliminarCerdo(cerdo.idcerdo) }"> </h:commandButton>
+                
+
+                <h:commandButton value="Ver Pesaje"  action="#{backingPesaje.historialPesaje(cerdo.idcerdo)}"/> 
+
+                <h:commandButton value="Mover a otro galpon" action="#{backingCerdo.moverCerdo(idCerdo, idGalpon)}" ></h:commandButton> 
+
+            </h:column>
+            </h:dataTable>
+
+
+        </h:form>
+
+
+    </h:body>
+</html>
+

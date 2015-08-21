@@ -17,24 +17,20 @@ import modelo.Cerdo;
  */
 @Stateless
 @LocalBean
-public class CerdoDAO extends AbstractDAO <Cerdo>{
+public class CerdoDAO extends AbstractDAO<Cerdo> {
 
-    
-     public CerdoDAO() {
+    public CerdoDAO() {
         super(Cerdo.class);
     }
-    
+
     @Override
     protected EntityManager getEntityManager() {
-                return em;
+        return em;
     }
-    
 
-       public List<Cerdo> getAll (){
-        Query query = em.createNamedQuery("cerdo.all");
-	List <Cerdo> cerdos = query.getResultList(); 
-        return cerdos;
-    
-       }
-    
+    public List <Cerdo> getAll() {
+        Query query = em.createNamedQuery("Cerdo.findAll");
+        return query.getResultList();
+
+    }
 }

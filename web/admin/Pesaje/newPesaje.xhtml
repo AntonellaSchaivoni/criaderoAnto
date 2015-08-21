@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Facelet Title</title>
+           <link href="../../Resource/css/demo.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body>
+        <h:form id="tematica">           
+            <h:panelGrid columns="2">
+                <h:outputText value="Fecha"  />                                        
+                <h:inputText id="fechaPesaje" value="#{backingPesaje.pesaje.fecha}" title="Fecha" required="true" requiredMessage="Requerido" />
+                <h:outputText value="Valor"/>                 
+                <h:inputText id="valor" value="#{backingPesaje.pesaje.valor}" title="valor" required="true" requiredMessage="Requerido" />
+                 <h:outputText value="Cerdo"/>                 
+                 <h:inputText id="cerdo" value="#{backingPesaje.idcerdo}" title="cerdo" required="true" requiredMessage="Requerido" />
+                <h:commandButton action="#{backingPesaje.crearPesaje()}" value="Crear" />
+            </h:panelGrid>
+        </h:form>
+    </h:body>
+</html>
+

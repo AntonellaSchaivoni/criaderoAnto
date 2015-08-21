@@ -5,6 +5,7 @@
 package BackingBean;
 
 import Daos.CerdoDAO;
+import Daos.GalponCerdoDAO;
 import Daos.GalponDAO;
 import java.util.List;
 import javax.ejb.EJB;
@@ -24,15 +25,28 @@ import modelo.GalponCerdo;
 @SessionScoped
 public class BackingGalpon {
 
+    private Galpon galponGral;
     private GalponCerdo galpon;
     private Cerdo cerdo;
     @EJB
     private GalponDAO galponDAO;
     @EJB
     private CerdoDAO cerdoDAO;
+    @EJB
+    private GalponCerdoDAO galponCerdoDAO;
 
     public BackingGalpon() {
         this.galpon = new GalponCerdo();
+        this.galponGral = new Galpon();
+
+    }
+
+    public Galpon getGalponGral() {
+        return galponGral;
+    }
+
+    public void setGalponGral(Galpon galponGral) {
+        this.galponGral = galponGral;
     }
 
     public GalponCerdo getGalpon() {
@@ -55,14 +69,14 @@ public class BackingGalpon {
         return galponDAO.getAll();
     }
 
-    public List getCerdosGalpon(long idGalpon) {
-        galpon = galponDAO.find(idGalpon);
+    public List getCerdosGalpon(int idGalpon) {
+        galpon = galponCerdoDAO.buscar(idGalpon);
         return galpon.getCerdo();
     }
 
-    public String eliminarCerdo(long id) {
+    public String eliminarCerdo(int id) {
         try {
-            cerdo = cerdoDAO.find(id);
+            cerdo = cerdoDAO.buscar(id);
             galpon.getCerdo().remove(cerdo);
             FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage(null, new FacesMessage("El cerdo fué eliminado exitosamente"));
@@ -74,9 +88,9 @@ public class BackingGalpon {
         }
     }
 
-    public String agregarGalpon() {
+    public String agregarGalponGral() {
         try {
-            galponDAO.create(galpon);
+            galponDAO.create(galponGral);
             FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage(null, new FacesMessage("El galpon fué creado exitosamente"));
             return ""; //retorna al listado de galpones
@@ -86,24 +100,20 @@ public class BackingGalpon {
             return ""; //retorna al form de creacion del galpon
         }
 
+
     }
 
-    public String agregarCerdoAGalpon(long idGalpon) {
+    public String agregarGalpon() {
         try {
-            GalponCerdo galponCerdo = galponDAO.find(idGalpon);
-            cerdoDAO.create(cerdo);
-            galponCerdo.getCerdo().add(cerdo);
+            galponCerdoDAO.create(galpon);
             FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(null, new FacesMessage("El cerdo fué agregado al galpon"));
-            return ""; //retorna al listado de los cerdos del galpon
+            context.addMessage(null, new FacesMessage("El galpon fué creado exitosamente"));
+            return ""; //retorna al listado de galpones
         } catch (Exception e) {
             FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(null, new FacesMessage("Error al agregar el cerdo al galpón"));
-            return ""; //retorna al formulario de creacion de cerdos
+            context.addMessage(null, new FacesMessage("Error al crear el galpon"));
+            return ""; //retorna al form de creacion del galpon
         }
-    }
-    
-    public List listarGalpones(){
-        return galponDAO.getAll();
+
     }
 }

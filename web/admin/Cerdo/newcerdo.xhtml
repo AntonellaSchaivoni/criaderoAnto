@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+  <h:head>
+        <title>Agregar Cerdos</title>
+         <link href="../../Resource/css/demo.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body>
+       
+            <h1></h1>
+            <h:form id="tematica">
+                <h:panelGrid columns="2">
+                    <h:outputText value="Numero de Caravana:"/>                  
+                    <h:inputText id="nro" value="#{backingCerdo.cerdo.NCaravana}" title="nro" required="true" requiredMessage="El campo Nombre es obligatorio." />
+                    <h:outputText value="Estado Corporal:"/>                  
+                    <h:inputText id="estado" value="#{backingCerdo.cerdo.estadoCorporal}" title="estado" required="true" requiredMessage="El campo Nombre es obligatorio." />
+                    <h:outputText value="Galpon"/>                  
+                    <h:inputText id="galpon" value="#{backingCerdo.cerdo.galpon}" title="galpon" required="true" requiredMessage="El campo Nombre es obligatorio." />
+                    <h:outputText value="Sexo:"/>                  
+                    <h:inputText id="sexo" value="#{backingCerdo.cerdo.sexo}" title="sexo" required="true" requiredMessage="El campo Nombre es obligatorio." />
+                    
+                    <h:commandButton action="#{backingCerdo.agregarCerdo()}" value="Crear" />
+                
+                </h:panelGrid>
+               
+            </h:form>   
+    </h:body>
+</html>

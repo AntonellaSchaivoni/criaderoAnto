@@ -16,7 +16,8 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import modelo.Cerdo;
 import modelo.Parto;
-import modelo.TieneParto;
+import modelo.TienePartos;
+import modelo.Vacuna;
 
 /**
  *
@@ -30,7 +31,7 @@ public class BackingParto {
     private PartoDAO partoDAO;
     @EJB
     private TienePartoDAO tienePartoDAO;
-    private TieneParto tieneParto;
+    private TienePartos tieneParto;
     private Parto parto;
     /*   Atributos de nuevo parto      */
     private int cantChanchos;
@@ -40,8 +41,10 @@ public class BackingParto {
     private Cerdo cerdo;
     
     public BackingParto() {
+        parto= new Parto();
     }
 
+    
     public PartoDAO getPartoDAO() {
         return partoDAO;
     }
@@ -58,11 +61,11 @@ public class BackingParto {
         this.tienePartoDAO = tienePartoDAO;
     }
 
-    public TieneParto getTieneParto() {
+    public TienePartos getTieneParto() {
         return tieneParto;
     }
 
-    public void setTieneParto(TieneParto tieneParto) {
+    public void setTieneParto(TienePartos tieneParto) {
         this.tieneParto = tieneParto;
     }
 
@@ -114,18 +117,15 @@ public class BackingParto {
         this.cerdo = cerdo;
     }
     
+      public List <Parto> getPartos(){
+        return partoDAO.getAll();
+    }
     
     
-    private String crearParto(){
+    public String crearParto(){
         try {
             /*     Inicialización de parto               */
-            parto = new Parto();
-            parto.setCantChancho(cantChanchos);
-            parto.setCantMuertos(cantMuertos);
-            parto.setFecha(fecha);
-            parto.setNumParto(numeroParto);
-            parto.setCerdo(cerdo);
-            
+           
             /*   Almacenar en base de datos         */
             partoDAO.create(parto);
             
@@ -147,13 +147,13 @@ public class BackingParto {
     }
     
     
-    private String agregarCerdoParto(Parto parto,Cerdo cria ){
+    private String agregarCerdoParto(Parto parto, Cerdo madre ){
         try {
             /*    Inicializar tiene parto            */
-            TieneParto tp = new TieneParto();
-            tp.setEsCria(cria);
+            TienePartos tp = new TienePartos();
+            tp.setCria(parto);
             tp.setFecha(parto.getFecha());
-            tp.setEsProg(parto.getCerdo());
+            tp.setProgenitor(madre);
 
             /*    Almacenar en base de datos                  */
             tienePartoDAO.create(tp);
@@ -170,9 +170,9 @@ public class BackingParto {
         }
     }
     
-    private String removerParto(Long idParto){
+    private String removerParto(int idParto){
         try {
-            Parto p = partoDAO.find(idParto);
+            Parto p = partoDAO.buscar(idParto);
             partoDAO.remove(p);
             
             /*   Mensaje de exito         */

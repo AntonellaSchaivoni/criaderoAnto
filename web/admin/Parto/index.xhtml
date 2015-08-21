@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Ver Partos</title>
+        <link href="../../Resource/css/demo.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body>
+        <h:form id="TematicasExistentes">
+            <h:dataTable value="#{backingParto.partos}" var="parto"> 
+                <h:column>
+                    <f:facet name="d">
+                        <h:outputText value="Numero de Parto"></h:outputText>
+                    </f:facet>
+                    <h:outputText value="#{parto.numParto}" ></h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Cerdo"></h:outputText>
+                    </f:facet>
+                    <h:outputText value="#{parto.idcerdo}" ></h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Cantidad de crias"></h:outputText>
+                    </f:facet>
+                    <h:outputText value="#{parto.cantChancho}" ></h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Cantidad de crias muertas"></h:outputText>
+                    </f:facet>
+                    <h:outputText value="#{parto.cantMuertos}" ></h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Fecha"></h:outputText>
+                    </f:facet>
+                    <h:outputText value="#{parto.fecha}" ></h:outputText>
+                </h:column>
+               
+            </h:dataTable>
+        </h:form>
+    </h:body>
+</html>
+

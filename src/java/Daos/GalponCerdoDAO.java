@@ -44,7 +44,7 @@ public class GalponCerdoDAO extends AbstractDAO <GalponCerdo>{
      * @return GalponCerdo : Objeto que contiene la ubicación del cerdo,
      *                     fecha de ingreso y fecha de egreso.
      */
-    public GalponCerdo galponActual(Long idCerdo) throws Exception {
+    public GalponCerdo galponActual(int idCerdo) throws Exception {
         
         Query query = em.createNamedQuery("galponcerdo.galponactual");
 	query.setParameter("cerdo", idCerdo);

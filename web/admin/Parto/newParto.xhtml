@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Agregar Partos</title>
+        <link href="../../Resource/css/demo.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body>
+        <h:form id="Registrar">
+            <h:panelGrid columns="4">
+                <h:outputText value="Cantidad de cerdos:"  />                                          
+                <h:inputText id="cntChanchos" value="#{backingParto.cantChanchos }" title="nombre" required="true" requiredMessage="Requerido" />
+
+                <h:outputText value="Cantidad de cerdos muertos:"/>                 
+                <h:inputText id="cntMuertos" value="#{backingParto.cantMuertos }" title="nombre" required="true" requiredMessage="Requerido" />
+
+                <h:outputText value="Fecha:"/>                  
+                <h:inputText id="fecha" value="#{backingParto.fecha }" title="nombre" required="true" requiredMessage="Requerido" />
+
+                <h:outputText value="Cerdo"/>                  
+                <h:inputText id="caravana" value="#{backingParto.cerdo.NCaravana}" title="nombre"  />
+
+                <h:commandButton action="#{backingParto.crearParto()}" value="Crear" />
+            </h:panelGrid> 
+        </h:form>
+    </h:body>
+</html>

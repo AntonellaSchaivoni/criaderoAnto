@@ -28,6 +28,7 @@ public class BackingEnfermedad {
     private String nombrePopular;
 
     public BackingEnfermedad() {
+        enfermedad= new Enfermedad();
     }
 
     public Enfermedad getEnfermedad() {
@@ -53,8 +54,7 @@ public class BackingEnfermedad {
      * @return 
      */
     public String crearEnfermedad( ){
-        enfermedad.setNombreCientifico(nombreCientifico);
-        enfermedad.setNombrePopular(nombrePopular);
+       
         try {
             enfermedadDAO.create(enfermedad);
         
@@ -74,9 +74,9 @@ public class BackingEnfermedad {
      *                       a eliminar 
      * @return 
      */
-    public String removerEnfermedad(Long idEnfermedad){
+    public String removerEnfermedad(int idenfermedad){
         try {
-            Enfermedad e = enfermedadDAO.find(idEnfermedad);
+            Enfermedad e = enfermedadDAO.buscar(idenfermedad);
             enfermedadDAO.remove(e);
             
             FacesContext context = FacesContext.getCurrentInstance();
@@ -89,7 +89,7 @@ public class BackingEnfermedad {
         }
     }
     
-    public List<Enfermedad> listarEnfermedades(){
+    public List<Enfermedad> getEnfermedades(){
         return enfermedadDAO.getAll();
     }
     

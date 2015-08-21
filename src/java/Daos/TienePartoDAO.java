@@ -9,7 +9,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import modelo.TieneParto;
+import modelo.TienePartos;
 
 /**
  *
@@ -17,11 +17,11 @@ import modelo.TieneParto;
  */
 @Stateless
 @LocalBean
-public class TienePartoDAO extends AbstractDAO <TieneParto>{
+public class TienePartoDAO extends AbstractDAO <TienePartos>{
 
     
      public TienePartoDAO() {
-        super(TieneParto.class);
+        super(TienePartos.class);
     }
     
     @Override
@@ -30,9 +30,9 @@ public class TienePartoDAO extends AbstractDAO <TieneParto>{
     }
     
 
-       public List<TieneParto> getAll (){
+       public List<TienePartos> getAll (){
         Query query = em.createNamedQuery("tiene_parto.all");
-	List <TieneParto> tiene = query.getResultList(); 
+	List <TienePartos> tiene = query.getResultList(); 
         return tiene;
     
        }

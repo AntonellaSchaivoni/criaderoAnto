@@ -28,6 +28,7 @@ public class BackingVacuna {
    private VacunaDAO vacunaDAO;
    
     public BackingVacuna() {
+        this.vacuna= new Vacuna ();
     }
     
       public Vacuna getVacuna() {
@@ -37,7 +38,7 @@ public class BackingVacuna {
     public void setVacuna(Vacuna vacuna) {
         this.vacuna = vacuna;
     }
-    public List listarVacunas(){
+    public List <Vacuna> getVacunas(){
         return vacunaDAO.getAll();
     }
     
@@ -51,6 +52,21 @@ public class BackingVacuna {
             FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage(null, new FacesMessage("Error al crear vacuna"));
             return ""; //retorna al form de creacion de vacuna
+        }
+    }
+    
+      public String eliminarVacuna(int id) {
+        try {
+             vacuna = vacunaDAO.buscar(id);
+            /*  El cerdo no debería ser eliminado    */            
+            vacunaDAO.remove(vacuna);
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage("La vacuna fué eliminada exitosamente"));
+            return "";
+        } catch (Exception e){
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage("Error al eliminar vacuna"));
+            return "";
         }
     }
 }
