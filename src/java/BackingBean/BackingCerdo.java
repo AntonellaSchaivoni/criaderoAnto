@@ -79,6 +79,10 @@ public class BackingCerdo {
             return "";
         }
     }
+    public String irAPesaje(int id) throws Exception{
+        cerdo=cerdoDAO.buscar(id);
+        return ""+id; //pagina del pesaje
+    }
     
     /**
      * 

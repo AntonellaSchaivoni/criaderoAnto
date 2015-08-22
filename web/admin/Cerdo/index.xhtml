@@ -48,9 +48,9 @@
                 <h:commandButton value="Borrar" action="#{backingCerdo.eliminarCerdo(cerdo.idcerdo) }"> </h:commandButton>
                 
 
-                <h:commandButton value="Ver Pesaje"  action="#{backingPesaje.historialPesaje(cerdo.idcerdo)}"/> 
+                <h:commandButton value="Ver Pesaje"  action="#{backingCerdo.irAPesaje(cerdo.idcerdo)}"/> 
 
-                <h:commandButton value="Mover a otro galpon" action="#{backingCerdo.moverCerdo(idCerdo, idGalpon)}" ></h:commandButton> 
+                <h:commandButton value="Mover a otro galpon" action="#{backingCerdo.moverCerdo(cerdo.idcerdo, cerdo.galpon)}" ></h:commandButton> 
 
             </h:column>
             </h:dataTable>
